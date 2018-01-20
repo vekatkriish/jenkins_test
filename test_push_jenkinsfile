@@ -6,7 +6,7 @@ pipeline {
             steps {
                 when {
                 
-                expression { env.task == 'branchCreation' }
+                expression { param.foldername == 'branch' }
            	job('example-1') {
     		publishers {
         		git {
