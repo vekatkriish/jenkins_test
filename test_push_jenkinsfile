@@ -1,0 +1,45 @@
+pipeline {
+    agent any 
+
+    stages {
+        stage('GIT_BRANCH'){
+            steps {
+                when {
+                
+                expression { env.task == 'branchCreation' }
+           	job('example-1') {
+    		publishers {
+        		git {
+        			remote {
+              				name("origin")
+              				url("https://github.com/vekatkriish/jenkins_test.git")
+         			 }
+            		pushOnlyIfSuccess()
+            		branch('origin', 'staging')
+            		create()
+        }
+    }
+}
+
+                }
+                            }
+        }
+        stage('GIT_MERGE') { 
+            steps { 
+                when {
+                
+                expression { env.task == 'merge' }
+            }
+
+                echo branch mergerd 
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                
+                            }
+        }
+    }
+}
+
